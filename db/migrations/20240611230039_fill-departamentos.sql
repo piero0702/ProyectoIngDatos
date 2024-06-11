@@ -1,7 +1,5 @@
 -- migrate:up
 
--- migrate:up
-
 INSERT INTO departamentos (id, nombre) VALUES
     (1, 'Amazonas'),
     (2, 'Áncash'),
@@ -32,8 +30,3 @@ INSERT INTO departamentos (id, nombre) VALUES
 -- migrate:down
 
 DELETE FROM departamentos;
-
-
--- migrate:down
-
-DELETE FROM departamentos
