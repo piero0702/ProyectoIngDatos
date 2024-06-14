@@ -1,8 +1,8 @@
 -- migrate:up
 
-INSERT INTO tiposEntrega (id,nombre,costo) VALUES
-    (1, 'recojoTienda' ,'0'),
-    (2, 'envioDomicilio' ,'10');
+INSERT INTO tiposEntrega (id,nombre) VALUES
+    (1, 'recojoTienda'),
+    (2, 'envioDomicilio');
 
 -- migrate:down
 
