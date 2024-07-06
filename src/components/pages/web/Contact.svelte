@@ -19,7 +19,7 @@
         <h2>Contact Us</h2>
         <form>
           <div class="mb-3">
-            <label for="name" class="form-label">Name</label>
+            <label for="name" class="form-label">Nombre</label>
             <input type="text" class="form-control" id="name" required>
           </div>
           <div class="mb-3">
@@ -27,15 +27,15 @@
             <input type="email" class="form-control" id="email" required>
           </div>
           <div class="mb-3">
-            <label for="message" class="form-label">Message</label>
+            <label for="message" class="form-label">Mensaje</label>
             <textarea class="form-control" id="message" rows="4" required></textarea>
           </div>
-          <button type="submit" class="btn btn-primary">Send Message</button>
+          <button type="submit" class="btn btn-primary">Enviar!</button>
         </form>
       </div>
       <!-- Image -->
       <div class="col-md-6">
-        <img src="https://via.placeholder.com/600x400" class="img-fluid" alt="Contact Image">
+        <img src="https://fluyebottle.com/images/subscribe/sus.jpeg" class="img-fluid" alt="Contact Image">
       </div>
     </div>
   </div>

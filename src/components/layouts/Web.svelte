@@ -6,6 +6,7 @@ import Index from '../pages/web/Index.svelte';
 import Contact from '../pages/web/Contact.svelte';
 import About from '../pages/web/About.svelte';
 import Services from '../pages/web/Services.svelte';
+import Productos from '../pages/web/Productos.svelte';
 export let basepath = '/';
 
 onMount(() => {
@@ -17,7 +18,7 @@ onMount(() => {
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/" on:click|preventDefault={() => {navigate('/')}}>Fluye</a>
+    <a class="navbar-brand" href="/" on:click|preventDefault={() => {navigate('/')}}><img class="img-fluid w-25"  src="/FluyebottleSAC.png" alt="Logo"/></a>    
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -48,6 +49,7 @@ onMount(() => {
   <Route path="/about" component={About} />
   <Route path="/contact" component={Contact} />
   <Route path="/services" component={Services} />
+  <Route path="/productos" component={Productos}/>
 </Router>
 
 <footer class="bg-dark text-white pt-4">
@@ -56,7 +58,7 @@ onMount(() => {
       <!-- About Section -->
       <div class="col-md-4 mb-3">
         <h5>About Us</h5>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum.</p>
+        <p>En octubre de 2017, fundamos Fluye con la misión de abordar la contaminación ambiental causada por el uso desmedido de plástico. Hartos de presenciar la degradación de nuestro entorno natural debido a botellas y envases plásticos, decidimos aportar nuestra solución.</p>
       </div>
       <!-- Quick Links Section -->
       <div class="col-md-4 mb-3">

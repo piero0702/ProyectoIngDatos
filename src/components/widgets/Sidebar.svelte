@@ -8,7 +8,7 @@
   <!-- Content For Sidebar -->
   <div class="h-100">
     <div class="sidebar-logo">
-      <a href="#">Gimnasio ULima</a>
+      <a href="#">Fluye</a>
     </div>
     <ul class="sidebar-nav">
       <li class="sidebar-header">

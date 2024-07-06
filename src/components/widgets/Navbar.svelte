@@ -1,4 +1,8 @@
-<script></script>
+<script>
+  function handleLogout() {
+      alert('Log Out completado satisfactoriamente!');
+    }
+</script>
 
 <style></style>
 
@@ -15,7 +19,7 @@
           <div class="dropdown-menu dropdown-menu-end">
             <a href="#" class="dropdown-item">Profile</a>
             <a href="#" class="dropdown-item">Setting</a>
-            <a href="#" class="dropdown-item">Logout</a>
+            <a href="/" class="dropdown-item" on:click={handleLogout}>Logout</a>
           </div>
       </li>
     </ul>

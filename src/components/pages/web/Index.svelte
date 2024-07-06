@@ -1,7 +1,6 @@
 <script>
   import { onMount } from 'svelte';
-  import { navigate } from 'svelte-routing';
-  
+  import { navigate, Router, Route} from 'svelte-routing';
   onMount(() => {
 
   });
@@ -11,6 +10,7 @@
 <svelte:head>
 	<title>Inicio</title>
 </svelte:head>
+
 <!-- Carousel -->
 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
   <ol class="carousel-indicators">
@@ -20,24 +20,17 @@
   </ol>
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="https://www.ulima.edu.pe/sites/default/files/banner/image/connect-2024_1-bannerwebulima-1170x550.png" class="d-block w-100" alt="...">
+      <img src="https://fluye-statics.s3.amazonaws.com/banners/Cups_1920x700.jpg" class="d-block w-100" alt="...">
       <div class="carousel-caption d-none d-md-block">
         <h5>First Slide</h5>
         <p>Some representative placeholder content for the first slide.</p>
       </div>
     </div>
     <div class="carousel-item">
-      <img src="https://www.ulima.edu.pe/sites/default/files/banner/image/banner-web-redes.jpg" class="d-block w-100" alt="...">
+      <img src="https://scontent.flim15-2.fna.fbcdn.net/v/t39.30808-6/438729765_822937256519837_3677215015024177512_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=YJHh-6GOfMIQ7kNvgEXJsNN&_nc_ht=scontent.flim15-2.fna&oh=00_AYAvJgnjTwSCaVdChMEUGW5IrvArrdBZ231tlYjO45Dnmw&oe=668F53ED" class="d-block w-100" alt="...">
       <div class="carousel-caption d-none d-md-block">
         <h5>Second Slide</h5>
         <p>Some representative placeholder content for the second slide.</p>
-      </div>
-    </div>
-    <div class="carousel-item">
-      <img src="https://www.ulima.edu.pe/sites/default/files/banner/image/sgbachiller_webbanner_ulima_1170x550_2_002.png" class="d-block w-100" alt="...">
-      <div class="carousel-caption d-none d-md-block">
-        <h5>Third Slide</h5>
-        <p>Some representative placeholder content for the third slide.</p>
       </div>
     </div>
   </div>
@@ -60,8 +53,9 @@
           <div class="icon bg-primary text-white rounded-circle mb-3">
             <i class="bi bi-briefcase-fill"></i>
           </div>
-          <h3 class="h4">Feature One</h3>
-          <p>Some representative placeholder content for the first feature.</p>
+          <h3 class="h4">¡Somos más que una bottle!</h3>
+          <p>Al comprar una botella reutilizable Fluye estás comprando practicidad y elegancia a tu estilo con los mejores productos sostenibles. Por cada Fluye que compras, reduces el uso de plásticos en tu vida diaria, y aportas a una ONG con impacto social y medioambiental. ¿Ya tienes tu FLUYE BOTTLE favorita?
+          </p>
         </div>
       </div>
       <div class="col-lg-4">
@@ -91,9 +85,9 @@
   <div class="container">
     <div class="row text-center">
       <div class="col">
-        <h2>Call to Action</h2>
-        <p class="lead">A short description of your call to action.</p>
-        <a href="#" class="btn btn-primary btn-lg">Get Started</a>
+        <h2>Productos</h2>
+        <p class="lead">Desea ver los productos que tenemos en stock?</p>
+        <a href="/productos" on:click|preventDefault={() => {navigate('/productos')}} class="btn btn-primary btn-lg">Ver Ahora!</a>
       </div>
     </div>
   </div>
