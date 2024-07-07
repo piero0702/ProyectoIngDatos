@@ -1,8 +1,8 @@
 -- migrate:up
 
-CREATE TABLE departamentos (
+CREATE TABLE distritos (
     id INTEGER PRIMARY KEY,
     nombres VARCHAR(50)
 );
 -- migrate:down
-DROP TABLE departamentos;
+DROP TABLE distritos;

@@ -1,0 +1,35 @@
+-- migrate:up
+INSERT INTO direcciones (id, direccionEntrega, codigoPostal, distrito_id)
+VALUES
+  (1, 'Av. Primavera 123', '15001', 1),
+  (2, 'Jr. Los Olivos 456', '15002', 2),
+  (3, 'Calle Las Flores 789', '15003', 3),
+  (4, 'Av. Angamos 321', '15004', 4),
+  (5, 'Jr. San Martín 654', '15005', 5),
+  (6, 'Calle Los Pinos 987', '15006', 6),
+  (7, 'Av. Chorrillos 159', '15007', 7),
+  (8, 'Jr. Independencia 753', '15008', 8),
+  (9, 'Calle Libertad 951', '15009', 9),
+  (10, 'Av. La Paz 159', '15010', 10),
+  (11, 'Jr. Amazonas 357', '15011', 11),
+  (12, 'Calle Miraflores 753', '15012', 12),
+  (13, 'Av. Primavera 357', '15013', 13),
+  (14, 'Jr. Los Cedros 159', '15014', 14),
+  (15, 'Calle Las Orquídeas 753', '15015', 15),
+  (16, 'Av. San Felipe 951', '15016', 16),
+  (17, 'Jr. Santa Rosa 159', '15017', 17),
+  (18, 'Calle Las Magnolias 753', '15018', 18),
+  (19, 'Av. Industrial 951', '15019', 19),
+  (20, 'Jr. La Unión 159', '15020', 20),
+  (21, 'Calle Los Almendros 753', '15021', 21),
+  (22, 'Av. Los Eucaliptos 951', '15022', 22),
+  (23, 'Jr. Los Sauces 159', '15023', 23),
+  (24, 'Calle Las Lomas 753', '15024', 24),
+  (25, 'Av. Los Nogales 951', '15025', 25),
+  (26, 'Jr. Los Tulipanes 159', '15026', 26),
+  (27, 'Calle Las Violetas 753', '15027', 27),
+  (28, 'Av. Las Palmeras 951', '15028', 28),
+  (29, 'Jr. Las Acacias 159', '15029', 29),
+  (30, 'Calle Las Margaritas 753', '15030', 30);
+-- migrate:down
+DELETE FROM direcciones;
