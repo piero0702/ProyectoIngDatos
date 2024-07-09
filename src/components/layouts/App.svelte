@@ -13,6 +13,8 @@ import Country from '../pages/app/Country.svelte';
 import Departamentos from '../pages/app/Departamentos.svelte';
 import Tipos from '../pages/app/Tipos.svelte';
 import Productos from '../pages/app/Productos.svelte';
+	import Clientes from '../pages/app/Clientes.svelte';
+	import Pedidos from '../pages/app/Pedidos.svelte';
 export let basepath = '/admin';
 
 const toggleRootClass = () => {
@@ -72,6 +74,8 @@ onMount(() => {
           <Route path= "/departamentos" component={Departamentos}/>
           <Route path= "/tipos" component={Tipos}/>
           <Route path= "/productos" component={Productos}/>
+          <Route path= "/clientes" component={Clientes}/>
+          <Route path= "/pedidos" component={Pedidos}/>
         </Router>
       </div>
     </main>

@@ -27,6 +27,16 @@
 
       <ul id="pages" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
         <li class="sidebar-item">
+          <a class="sidebar-link" href="/admin/clientes" on:click|preventDefault={() => {navigate('/admin/clientes')}}>
+            Lista de Clientes
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a class="sidebar-link" href="/admin/pedidos" on:click|preventDefault={() => {navigate('/admin/pedidos')}}>
+            Lista de Pedidos
+          </a>
+        </li>
+        <li class="sidebar-item">
           <a class="sidebar-link" href="/admin/departamentos" on:click|preventDefault={() => {navigate('/admin/departamentos')}}>
             Lista de Departamentos
           </a>
