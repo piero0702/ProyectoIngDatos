@@ -1,6 +1,6 @@
 -- migrate:up
 CREATE TABLE clientes (
-  id INT PRIMARY KEY,
+  id INTEGER PRIMARY KEY,
   nombres VARCHAR(50),
   apellidos VARCHAR(80),
   telefono VARCHAR(10),

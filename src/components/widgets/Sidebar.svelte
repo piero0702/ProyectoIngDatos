@@ -22,33 +22,60 @@
       <li class="sidebar-item">
         <a href="#" class="sidebar-link collapsed" data-bs-target="#pages" data-bs-toggle="collapse"
             aria-expanded="false"><i class="fa-solid fa-file-lines pe-2"></i>
-            Datos Maestros
+            Sin foraneas
         </a>
 
       <ul id="pages" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+        
         <li class="sidebar-item">
-          <a class="sidebar-link" href="/admin/clientes" on:click|preventDefault={() => {navigate('/admin/clientes')}}>
-            Lista de Clientes
+          <a class="sidebar-link" href="/admin/colores" on:click|preventDefault={() => {navigate('/admin/colores')}}>
+            Lista de colores
           </a>
         </li>
         <li class="sidebar-item">
-          <a class="sidebar-link" href="/admin/pedidos" on:click|preventDefault={() => {navigate('/admin/pedidos')}}>
-            Lista de Pedidos
+          <a class="sidebar-link" href="/admin/tamanios" on:click|preventDefault={() => {navigate('/admin/tamanios')}}>
+            Lista de tamanios
           </a>
         </li>
         <li class="sidebar-item">
-          <a class="sidebar-link" href="/admin/departamentos" on:click|preventDefault={() => {navigate('/admin/departamentos')}}>
-            Lista de Departamentos
+          <a class="sidebar-link" href="/admin/cupones" on:click|preventDefault={() => {navigate('/admin/cupones')}}>
+            Lista de cupones
           </a>
         </li>
+        <li class="sidebar-item">
+          <a class="sidebar-link" href="/admin/distritos" on:click|preventDefault={() => {navigate('/admin/distritos')}}>
+            Lista de distritos
+          </a>
+        </li>
+      
+
+        
+
+
+
+       
+
         <li class="sidebar-item">
           <a class="sidebar-link" href="/admin/tipos" on:click|preventDefault={() => {navigate('/admin/tipos')}}>
             Lista de Tipos
           </a>
         </li>
+
         <li class="sidebar-item">
-          <a class="sidebar-link" href="/admin/productos" on:click|preventDefault={() => {navigate('/admin/productos')}}>
-            Lista de Productos
+          <a class="sidebar-link" href="/admin/documento" on:click|preventDefault={() => {navigate('/admin/documento')}}>
+            Lista de Documentos
+          </a>
+        </li>
+
+        <li class="sidebar-item">
+          <a class="sidebar-link" href="/admin/entrega" on:click|preventDefault={() => {navigate('/admin/entrega')}}>
+            Lista de Entregas
+          </a>
+        </li>
+
+        <li class="sidebar-item">
+          <a class="sidebar-link" href="/admin/tiposProductos" on:click|preventDefault={() => {navigate('/admin/tiposProductos')}}>
+            Lista de Tipos de Productos
           </a>
         </li>
       </ul>
@@ -56,60 +83,44 @@
     <li class="sidebar-item">
         <a href="#" class="sidebar-link collapsed" data-bs-target="#posts" data-bs-toggle="collapse"
             aria-expanded="false"><i class="fa-solid fa-sliders pe-2"></i>
-            Posts
+            Con foraneas
         </a>
         <ul id="posts" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
           <li class="sidebar-item">
-            <a href="#" class="sidebar-link">Post 1</a>
+            <a class="sidebar-link" href="/admin/clientes" on:click|preventDefault={() => {navigate('/admin/clientes')}}>
+              Lista de Clientes
+            </a>
           </li>
+  
           <li class="sidebar-item">
-            <a href="#" class="sidebar-link">Post 2</a>
+            <a class="sidebar-link" href="/admin/pedidos" on:click|preventDefault={() => {navigate('/admin/pedidos')}}>
+              Lista de Pedidos
+            </a>
           </li>
+
           <li class="sidebar-item">
-            <a href="#" class="sidebar-link">Post 3</a>
+            <a class="sidebar-link" href="/admin/productos" on:click|preventDefault={() => {navigate('/admin/productos')}}>
+              Lista de Productos
+            </a>
           </li>
+
+          <li class="sidebar-item">
+            <a class="sidebar-link" href="/admin/direcciones" on:click|preventDefault={() => {navigate('/admin/direcciones')}}>
+              Lista de direcciones
+            </a>
+          </li>
+
+          <li class="sidebar-item">
+            <a class="sidebar-link" href="/admin/pedidosProductos" on:click|preventDefault={() => {navigate('/admin/pedidosProductos')}}>
+              Lista de Pedidos-Productos
+            </a>
+          </li>
+
+
+
         </ul>
       </li>
-      <li class="sidebar-item">
-        <a href="#" class="sidebar-link collapsed" data-bs-target="#auth" data-bs-toggle="collapse"
-            aria-expanded="false"><i class="fa-regular fa-user pe-2"></i>
-            Auth
-        </a>
-        <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-          <li class="sidebar-item">
-            <a href="#" class="sidebar-link">Login</a>
-          </li>
-          <li class="sidebar-item">
-            <a href="#" class="sidebar-link">Register</a>
-          </li>
-          <li class="sidebar-item">
-            <a href="#" class="sidebar-link">Forgot Password</a>
-          </li>
-        </ul>
-      </li>
-      <li class="sidebar-header">
-        Multi Level Menu
-      </li>
-      <li class="sidebar-item">
-        <a href="#" class="sidebar-link collapsed" data-bs-target="#multi" data-bs-toggle="collapse"
-            aria-expanded="false"><i class="fa-solid fa-share-nodes pe-2"></i>
-            Multi Dropdown
-        </a>
-        <ul id="multi" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-          <li class="sidebar-item">
-            <a href="#" class="sidebar-link collapsed" data-bs-target="#level-1"
-                data-bs-toggle="collapse" aria-expanded="false">Level 1</a>
-            <ul id="level-1" class="sidebar-dropdown list-unstyled collapse">
-              <li class="sidebar-item">
-                  <a href="#" class="sidebar-link">Level 1.1</a>
-              </li>
-              <li class="sidebar-item">
-                  <a href="#" class="sidebar-link">Level 1.2</a>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </li>
+
     </ul>
   </div>
 </aside>

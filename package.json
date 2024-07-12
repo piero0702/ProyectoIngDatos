@@ -25,6 +25,7 @@
   "dependencies": {
     "bootstrap": "^5.3.3",
     "dbmate": "^2.15.0",
+    "dotenv": "^16.4.5",
     "sirv-cli": "^2.0.0",
     "sqlite3": "^5.1.7",
     "svelte": "^3.59.2",

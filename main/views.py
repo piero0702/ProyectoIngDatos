@@ -30,7 +30,17 @@ def home():
 @view.route('/admin/tipos',methods=['GET'])
 @view.route('/admin/productos',methods=['GET'])
 @view.route('/admin/clientes',methods=['GET'])
+@view.route('/admin/cliente/nuevo',methods=['GET'])
 @view.route('/admin/pedidos',methods=['GET'])
+@view.route('/admin/documento',methods=['GET'])
+@view.route('/admin/entrega',methods=['GET'])
+@view.route('/admin/tiposProductos',methods=['GET'])
+@view.route('/admin/colores',methods=['GET'])
+@view.route('/admin/tamanios',methods=['GET'])
+@view.route('/admin/cupones',methods=['GET'])
+@view.route('/admin/distritos',methods=['GET'])
+@view.route('/admin/direcciones',methods=['GET'])
+@view.route('/admin/pedidosProductos',methods=['GET'])
 @view.route('/admin', methods=['GET'])
 def app():
   locals = {}

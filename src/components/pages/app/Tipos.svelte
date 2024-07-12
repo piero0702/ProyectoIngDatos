@@ -33,7 +33,6 @@
     
     <div class="mb-3">
       <h4>Gestión de Tipos de Producto</h4>
-      <a href="/admin/body-part/new" on:click|preventDefault={() => navigate(`/admin/body-part/new`)} class="btn btn-success">Agregar Registro</a>
     </div>
     <!-- Table Element -->
     <div class="card border-0">
@@ -50,7 +49,6 @@
             <tr>
               <th scope="col">id</th>
               <th scope="col">Nombre</th>
-              <th scope="col">Acciones</th>
             </tr>
           </thead>
           <tbody>
@@ -58,10 +56,7 @@
               <tr>
                 <td>{bpart.id}</td>
                 <td>{bpart.nombres}</td>
-                <td>
-                  <a href="/admin/tipos/edit/{bpart.id}" on:click|preventDefault={() => navigate(`/admin/tipos/edit/${bpart.id}`)} class="btn btn-danger">Editar</a>
 
-                </td>
               </tr>
             {/each}
           </tbody>

@@ -26,6 +26,7 @@
 
   const deletePedido = (pedido_id) => {
     alert(`Eliminar pedido con ID: ${pedido_id}`);
+    // Aquí iría la lógica para eliminar el pedido
   }
 </script>
 
@@ -38,7 +39,6 @@
   <a href="/admin/pedido/nuevo" on:click|preventDefault={() => navigate(`/admin/pedido/nuevo`)} class="btn btn-success">Agregar Pedido</a>
 </div>
 
-
 <div class="card border-0">
   <div class="card-header">
     <h5 class="card-title">Pedidos</h5>
@@ -48,25 +48,22 @@
       <thead>
         <tr>
           <th scope="col">ID Pedido</th>
-          <th scope="col">Cliente</th>
-          <th scope="col">Pedido</th>
-          <th scope="col">Importe Total</th>
-          <th scope="col">Observaciones</th>
+          <th scope="col">Tipo Entrega ID</th>
+          <th scope="col">Cupón ID</th>
+          <th scope="col">Cliente ID</th>
           <th scope="col">Acciones</th>
         </tr>
       </thead>
       <tbody>
         {#each Pedidos as pedido}
           <tr>
-            <td>{pedido.pedido_id}</td>
-            <td>{pedido.cliente}</td>
-            <td>{pedido.pedido}</td>
-            <td>{pedido.importeTotal}</td>
-            <td>{pedido.observaciones}</td>
+            <td>{pedido.id}</td>
+            <td>{pedido.tipoEntrega_id}</td>
+            <td>{pedido.cupon_id}</td>
+            <td>{pedido.cliente_id}</td>
             <td>
-
-              <a href="/admin/pedido/editar/{pedido.pedido_id}" on:click|preventDefault={() => navigate(`/admin/pedido/editar/${pedido.pedido_id}`)} class="btn btn-danger">Editar</a>
-              <button on:click|preventDefault={() => deletePedido(pedido.pedido_id)} class="btn btn-secondary">Eliminar</button>
+              <a href={`/admin/pedido/editar/${pedido.id}`} on:click|preventDefault={() => navigate(`/admin/pedido/editar/${pedido.id}`)} class="btn btn-danger">Editar</a>
+              <button on:click|preventDefault={() => deletePedido(pedido.id)} class="btn btn-secondary">Eliminar</button>
             </td>
           </tr>
         {/each}
