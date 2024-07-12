@@ -10,7 +10,6 @@ import Level from '../pages/app/Level.svelte';
 import BodyPart from '../pages/app/BodyPart.svelte';
 import Member from '../pages/app/Member.svelte';
 import Country from '../pages/app/Country.svelte';
-import Departamentos from '../pages/app/Departamentos.svelte';
 import Tipos from '../pages/app/Tipos.svelte';
 import Productos from '../pages/app/Productos.svelte';
 	import Clientes from '../pages/app/Clientes.svelte';
@@ -25,6 +24,7 @@ import Productos from '../pages/app/Productos.svelte';
 	import Tamanios from '../pages/app/Tamanios.svelte';
 	import Direcciones from '../pages/app/Direcciones.svelte';
 	import PedidosProductos from '../pages/app/PedidosProductos.svelte';
+	import PedidosDetalle from '../pages/app/PedidosDetalle.svelte';
 export let basepath = '/admin';
 
 const toggleRootClass = () => {
@@ -81,12 +81,15 @@ onMount(() => {
           <Route path="/body-part" component={BodyPart} />
           <Route path="/member" component={Member} />
           <Route path="/country" component={Country} />
-          <Route path= "/departamentos" component={Departamentos}/>
           <Route path= "/tipos" component={Tipos}/>
           <Route path= "/productos" component={Productos}/>
           <Route path= "/clientes" component={Clientes}/>
-          <Route path= "/pedidos" component={Pedidos}/>
           <Route path= "/cliente/nuevo" component={ClienteDetalle}/>
+
+
+          <Route path= "/pedidos" component={Pedidos}/>
+          <Route path= "/pedido/nuevo" component={PedidosDetalle}/>
+          
           <Route path= "/documento" component={TipoDocumento}/>
           <Route path= "/tiposProductos" component={TiposProductos}/>     
           <Route path= "/entrega" component={Entrega}/>     

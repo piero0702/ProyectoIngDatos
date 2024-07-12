@@ -435,9 +435,71 @@ def pedidos_list():
         session.close()
 
 
+@api.route('/pedido/eliminar', methods=['DELETE'])
+def pedido_eliminar():
+    Session = sessionmaker(bind=engine)
+    session = Session()
+    try:
+        datos = request.get_json()
+        pedido_id = datos.get('id')
+
+        if not pedido_id:
+            return json.dumps({"error": "Se requiere proporcionar un ID de pedido"}), 400
+
+        # Eliminar el pedido de la base de datos
+        query = text("DELETE FROM pedidos WHERE id = :id")
+        session.execute(query, {'id': pedido_id})
+        session.commit()
+
+        return json.dumps({"mensaje": "Pedido eliminado correctamente"}), 200
+
+    except Exception as e:
+        traceback.print_exc()
+        error_message = "Error al eliminar el pedido: {}".format(str(e))
+        return json.dumps({"error": error_message}), 500
+
+    finally:
+        session.close()
 
 
+@api.route('/pedido/grabar', methods=['POST'])
+def pedido_grabar():
+    Session = sessionmaker(bind=engine)
+    session = Session()
+    try:
+        datos = request.get_json()
 
+        # Obtener los IDs de tipoEntrega y cupon desde datos
+        tipoEntrega_id = datos.get('tipoEntrega_id')
+        cupon_id = datos.get('cupon_id')
+        cliente_id = datos.get('cliente_id')  # Asegúrate de obtener el cliente_id si es necesario
+
+        # Verificar que se reciben estos IDs
+        if tipoEntrega_id is None or cupon_id is None:
+            return json.dumps({"error": "Se requiere proporcionar tipoEntrega_id y cupon_id"}), 400
+        
+        # Insertar el pedido en la base de datos
+        query = text("""
+            INSERT INTO pedidos (tipoEntrega_id, cupon_id, cliente_id) 
+            VALUES (:tipoEntrega_id, :cupon_id, :cliente_id)
+        """)
+        result = session.execute(query, {
+            'tipoEntrega_id': tipoEntrega_id,
+            'cupon_id': cupon_id,
+            'cliente_id': cliente_id  # Asegúrate de pasar el cliente_id si es necesario
+        })
+
+        session.commit()
+
+        return json.dumps({"id": result.lastrowid}), 200
+
+    except Exception as e:
+        traceback.print_exc()
+        error_message = "Error desconocido: {}".format(str(e))
+        return json.dumps({"error": error_message}), 500
+
+    finally:
+        session.close()
 
 
 
@@ -470,8 +532,6 @@ JOIN distritos dt ON d.distrito_id = dt.id;
         return json.dumps({"error": error_message}), 500
     finally:
         session.close()
-
-
 
 
 

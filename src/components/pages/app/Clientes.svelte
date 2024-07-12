@@ -100,7 +100,7 @@
           <th scope="col">Email</th>
           <th scope="col">Contraseña</th>
           <th scope="col">Tipo de Documento</th>
-          <th scope="col">Distrito</th>
+          <th scope="col">Direccion</th>
           <th scope="col">Acciones</th>
         </tr>
       </thead>

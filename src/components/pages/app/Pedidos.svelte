@@ -24,10 +24,59 @@
       });
   }
 
-  const deletePedido = (pedido_id) => {
-    alert(`Eliminar pedido con ID: ${pedido_id}`);
-    // Aquí iría la lógica para eliminar el pedido
+  const deletePedido = (id) => {
+    if (confirm("¿Estás seguro de que quieres eliminar este pedido?")) {
+      fetch("/pedido/eliminar", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ id })
+      })
+      .then(response => {
+        if (!response.ok) {
+          return response.json().then(data => { throw new Error(data.error || "Error al eliminar el pedido"); });
+        }
+        return response.json();
+      })
+      .then(data => {
+        // Actualizar Pedidos después de eliminar el pedido
+        Pedidos = Pedidos.filter(pedido => pedido.id !== id);
+        console.log(data.mensaje);
+      })
+      .catch(error => {
+        console.error("Error al eliminar el pedido:", error);
+        alert(error.message || "Error al eliminar el pedido. Por favor, inténtelo de nuevo.");
+      });
+    }
   }
+
+  const agregarPedido = async (datosPedido) => {
+    try {
+      const opciones = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(datosPedido)
+      };
+
+      const response = await fetch("/pedido/grabar", opciones);
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error("Error en la solicitud: " + errorData.error);
+      }
+
+      // Actualizar la lista de pedidos después de agregar uno nuevo
+      fetchPedidos();
+
+      // Mostrar mensaje de éxito o hacer cualquier otra acción necesaria
+      console.log("Pedido agregado correctamente");
+
+    } catch (error) {
+      console.error("Error al agregar el pedido:", error);
+      alert("Error al intentar agregar pedido. Por favor, inténtelo de nuevo.");
+    }
+  }
+
 </script>
 
 <style>
