@@ -6,3 +6,6 @@ requests
 pyyaml
 python-dotenv
 SQLAlchemy
+
+# Si por alguna razón no funciona el dependencia 'SQLAlchemy' usar:
+# SQLAlchemy==1.4.39
