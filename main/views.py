@@ -44,6 +44,7 @@ def home():
 @view.route('/admin/pedidosProductos',methods=['GET'])
 @view.route('/admin/pedidosProductos/nuevo',methods=['GET'])
 @view.route('/admin/mostrarPedidoProducto',methods=['GET'])
+@view.route('/admin/pagos',methods=['GET'])
 @view.route('/admin', methods=['GET'])
 def app():
   locals = {}

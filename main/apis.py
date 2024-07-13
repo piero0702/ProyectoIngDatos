@@ -309,7 +309,7 @@ def distritos_list():
 
 
 
-#PRODUCTOS + ELIMINAR + GRABAR
+#PRODUCTOS + ELIMINAR
 @api.route('/productos/list', methods=['GET'])
 def productos_list():
     Session = sessionmaker(bind=engine)
@@ -317,7 +317,22 @@ def productos_list():
     try:
         with engine.connect() as connection:
             query = text("""
-                SELECT * FROM productos;
+                SELECT 
+    p.id AS producto_id,
+    p.descripcion AS producto_descripcion,
+    p.cuidados AS producto_cuidados,
+    p.propiedades AS producto_propiedades,
+    p.stock AS producto_stock,
+    t.nombres AS tipo_botella,
+    c.nombres AS color,
+    tm.numeroMl AS tamano,
+    p.imagen AS producto_imagen,
+    p.precio AS producto_precio
+FROM productos p
+INNER JOIN tipos t ON p.tipo_id = t.id
+INNER JOIN colores c ON p.color_id = c.id
+INNER JOIN tamanios tm ON p.tamano_id = tm.id;
+
             """)
             result = connection.execute(query)
             rows = result.fetchall()
@@ -346,6 +361,33 @@ def productos_list():
         return json.dumps({"error": error_message}), 500
     finally:
         session.close()
+
+@api.route('/producto/eliminar', methods=['DELETE'])
+def producto_eliminar():
+    Session = sessionmaker(bind=engine)
+    session = Session()
+    try:
+        datos = request.get_json()
+        producto_id = datos.get('id')
+
+        if not producto_id:
+            return json.dumps({"error": "Se requiere proporcionar un ID de cliente"}), 400
+
+        # Eliminar el cliente de la base de datos
+        query = text("DELETE FROM productos WHERE id = :id")
+        session.execute(query, {'id': producto_id})
+        session.commit()
+
+        return json.dumps({"mensaje": "Cliente eliminado correctamente"}), 200
+
+    except Exception as e:
+        traceback.print_exc()
+        error_message = "Error al eliminar el cliente: {}".format(str(e))
+        return json.dumps({"error": error_message}), 500
+
+    finally:
+        session.close()
+
 
 #CLIENTES + ELIMINAR + GRABAR
 @api.route('/clientes/list', methods=['GET'])
@@ -714,25 +756,31 @@ def mostrar_pedidos_productos_list():
             query = text("""
                 SELECT 
     p.id AS Pedido_id,
-    c.nombres || ' ' || c.apellidos || ' - ' || cp.codigo AS Pedido,+
-	pr.descripcion || ' - ' || pr.precio AS "Producto y Precio",
-    te.nombre AS "Tipo de entrega"
-    
+    c.nombres || ' ' || c.apellidos AS Cliente,
+    cp.codigo AS Cupon,
+    pr.descripcion AS Producto,
+    pr.precio AS Precio,
+    te.nombre AS "Tipo de entrega",
+    tp.nombre AS "Tipo Producto"
 FROM pedidos p
 JOIN clientes c ON p.cliente_id = c.id
 JOIN cupones cp ON p.cupon_id = cp.id
 JOIN tiposEntrega te ON p.tipoEntrega_id = te.id
 JOIN pedidos_productos pp ON p.id = pp.pedido_id
-JOIN productos pr ON pp.producto_id = pr.id;
+JOIN productos pr ON pp.producto_id = pr.id
+JOIN tiposProducto tp ON pp.tipoProducto_id = tp.id;
             """)
             result = connection.execute(query)
             rows = result.fetchall()
             if rows:
                 resp = [{
                     'id': r[0],
-                    'pedido_id': r[1],
-                    'producto_id': r[2],
-                    'tipoProducto_id': r[3]
+                    'cliente': r[1],
+                    'cupon': r[2],
+                    'producto': r[3],
+                    'precio': r[4],  # Asegura que el precio sea un float
+                    'tipo_entrega': r[5],
+                    'tipo_producto': r[6]
                 } for r in rows]
                 return json.dumps(resp)
             else:

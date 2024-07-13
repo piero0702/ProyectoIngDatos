@@ -1,6 +1,5 @@
 <script>
   import { onMount } from 'svelte';
-  import { navigate } from 'svelte-routing';
   
   let productos = [];
   
@@ -25,8 +24,31 @@
   };
   
   const deleteProducto = (id) => {
-    alert(id);
-  };
+    if (confirm("¿Estás seguro de que quieres eliminar este producto?")) {
+      fetch("/producto/eliminar", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ id })
+      })
+      .then(response => {
+        if (!response.ok) {
+          return response.json().then(data => { throw new Error(data.error || "Error al eliminar el producto"); });
+        }
+        return response.json();
+      })
+      .then(data => {
+        // Actualizar productos después de eliminar el producto
+        productos = productos.filter(producto => producto.id !== id);
+        console.log(data.mensaje);
+      })
+      .catch(error => {
+        console.error("Error al eliminar el producto:", error);
+        alert(error.message || "Error al eliminar el producto. Por favor, inténtelo de nuevo.");
+      });
+    }
+  }
 </script>
 
 <style>
@@ -50,9 +72,9 @@
           <th scope="col">Cuidados</th>
           <th scope="col">Propiedades</th>
           <th scope="col">Stock</th>
-          <th scope="col">Tipo de botella ID</th>
-          <th scope="col">Color ID</th>
-          <th scope="col">Tamaño ID</th>
+          <th scope="col">Tipo de botella</th>
+          <th scope="col">Color</th>
+          <th scope="col">Tamaño</th>
           <th scope="col">Imagen</th>
           <th scope="col">Precio</th>
           <th scope="col">Acciones</th>
@@ -74,7 +96,6 @@
             </td>
             <td>{producto.precio}</td>
             <td>
-              <a href="/admin/body-part/edit/{producto.id}" on:click|preventDefault={() => navigate(`/admin/body-part/edit/${producto.id}`)} class="btn btn-danger">Editar</a>
               <button on:click|preventDefault={() => deleteProducto(producto.id)} class="btn btn-secondary">Eliminar</button>
             </td>
           </tr>

@@ -109,7 +109,7 @@ onMount(() => {
 
           <Route path= "/cupones" component={Cupones}/> 
           <Route path= "/cupon/nuevo" component={CuponDetalle}/>  
-          
+
 
 
         </Router>

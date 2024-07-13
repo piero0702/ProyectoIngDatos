@@ -1,6 +1,6 @@
 -- migrate:up
 CREATE TABLE productos (
-    id INT PRIMARY KEY,
+    id INTEGER PRIMARY KEY,
     descripcion TEXT,
     cuidados TEXT,
     propiedades TEXT,
