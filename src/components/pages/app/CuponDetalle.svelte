@@ -41,9 +41,7 @@
         mensajeExito = "Cupón agregado correctamente";
     }
 
-    // Cargar datos (opcional)
     onMount(() => {
-        // Puedes añadir aquí la carga de datos si lo necesitas
     });
 </script>
 

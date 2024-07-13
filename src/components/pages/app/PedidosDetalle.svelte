@@ -1,18 +1,18 @@
 <script>
     import { navigate } from "svelte-routing";
-    let tipoEntrega_id = "";
-    let cupon_id = "";
-    let cliente_id = "";
+    let tipoEntregaId = "";
+    let cuponId = "";
+    let clienteId = "";
     let mensajeExito = "";
 
 
     async function grabar() {
         try {
-            if (tipoEntrega_id.trim() === "" || cupon_id.trim() === "" || cliente_id.trim() === "") {
+            if (tipoEntregaId.trim() === "" || cuponId.trim() === "" || clienteId.trim() === "") {
                 throw new Error('Por favor complete todos los campos');
             }
 
-            const datos = { tipoEntrega_id, cupon_id, cliente_id};
+            const datos = { tipoEntrega_id: tipoEntregaId, cupon_id: cuponId, cliente_id: clienteId};
             const opciones = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -61,16 +61,16 @@
 
             <form on:submit|preventDefault={grabar}>
                 <div class="form-group">
-                    <label for="tipoEntrega_id">Tipo de Entrega ID</label>
-                    <input type="text" class="form-control" id="tipoEntrega_id" placeholder="ID del tipo de entrega" bind:value={tipoEntrega_id}>
+                    <label for="tipoEntregaId">Tipo de Entrega ID</label>
+                    <input type="text" class="form-control" id="tipoEntregaId" placeholder="ID del tipo de entrega" bind:value={tipoEntregaId}>
                 </div>
                 <div class="form-group">
-                    <label for="cupon_id">Cupon ID</label>
-                    <input type="text" class="form-control" id="cupon_id" placeholder="ID del cupon" bind:value={cupon_id}>
+                    <label for="cuponId">Cupon ID</label>
+                    <input type="text" class="form-control" id="cuponId" placeholder="ID del cupon" bind:value={cuponId}>
                 </div>
                 <div class="form-group">
-                    <label for="cliente_id">Cliente ID</label>
-                    <input type="text" class="form-control" id="cliente_id" placeholder="ID del cliente" bind:value={cliente_id}>
+                    <label for="clienteId">Cliente ID</label>
+                    <input type="text" class="form-control" id="clienteId" placeholder="ID del cliente" bind:value={clienteId}>
                 </div>
 
 
