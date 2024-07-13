@@ -17,7 +17,7 @@
           return response.json(); // Convertir la respuesta a JSON
         })
         .then(data => {
-          PedidosProductos = data; // Asignar la respuesta a la variable PedidosProductos
+          PedidosProductos = data; // Asignar la respuesta a la variable PedidosProductosss
         })
         .catch(error => {
           console.error('Error en la solicitud:', error);

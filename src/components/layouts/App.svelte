@@ -56,7 +56,7 @@ onMount(() => {
     });
   }
 
-  const themeToggle = document.querySelector('.theme-toggle');
+  const themeToggle = document.querySelector('.theme-toggle'); //lagos
   if (themeToggle) {
     themeToggle.addEventListener('click', () => {
       toggleLocalStorage();

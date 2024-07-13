@@ -651,7 +651,7 @@ def pedidoProducto_eliminar():
         if not pedidoProducto_id:
             return json.dumps({"error": "Se requiere proporcionar un ID de pedido"}), 400
 
-        # Eliminar el pedido de la base de datos
+        # Eliminar el pedido de la base de datoss
         query = text("DELETE FROM pedidos_productos WHERE id = :id")
         session.execute(query, {'id': pedidoProducto_id})
         session.commit()

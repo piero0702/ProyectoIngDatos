@@ -28,7 +28,7 @@
             const data = await response.json();
             console.log("Respuesta del servidor:", data);
 
-            // Mostrar mensaje de éxitos
+            // Mostrar mensaje de éxitoss
             mostrarMensajeExito();
 
         } catch (error) {

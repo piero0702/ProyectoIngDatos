@@ -65,7 +65,7 @@
         throw new Error("Error en la solicitud: " + errorData.error);
       }
 
-      // Actualizar la lista de pedidoProductos después de agregar uno nuevo
+      // Actualizar la lista de pedidoProductos después de agregar uno nuevos
       fetchPedidosProductos();
 
       console.log("pedidoProducto agregado correctamente");

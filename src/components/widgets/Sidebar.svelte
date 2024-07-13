@@ -121,7 +121,7 @@
       <li class="sidebar-item">
         <a href="#" class="sidebar-link collapsed" data-bs-target="#mostrar" data-bs-toggle="collapse"
             aria-expanded="false"><i class="fa-solid fa-file-lines pe-2"></i>
-            Mostrar Lista
+            Mostrar Listas
         </a>
 
       <ul id="mostrar" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
