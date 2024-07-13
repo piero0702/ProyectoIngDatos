@@ -26,6 +26,8 @@ import Productos from '../pages/app/Productos.svelte';
 	import PedidosProductos from '../pages/app/PedidosProductos.svelte';
 	import PedidosDetalle from '../pages/app/PedidosDetalle.svelte';
 	import CuponDetalle from '../pages/app/CuponDetalle.svelte';
+	import PedidosProductoDetalle from '../pages/app/PedidosProductoDetalle.svelte';
+	import MostrarPedidoProducto from '../pages/app/MostrarPedidoProducto.svelte';
 export let basepath = '/admin';
 
 const toggleRootClass = () => {
@@ -90,8 +92,13 @@ onMount(() => {
           <Route path= "/colores" component={Colores}/>   
           <Route path= "/tamanios" component={Tamanios}/>   
           <Route path= "/distritos" component={Distritos}/>   
-          <Route path= "/direcciones" component={Direcciones}/>   
-          <Route path= "/pedidosProductos" component={PedidosProductos}/>   
+          <Route path= "/direcciones" component={Direcciones}/>
+          
+          
+          <Route path= "/pedidosProductos" component={PedidosProductos}/>
+          <Route path= "/pedidosproductos/nuevo" component={PedidosProductoDetalle}/>
+          <Route path= "/mostrarPedidoProducto" component={MostrarPedidoProducto}/>
+
 
           <Route path= "/clientes" component={Clientes}/>
           <Route path= "/cliente/nuevo" component={ClienteDetalle}/>

@@ -35,7 +35,6 @@
 
 <div class="mb-3">
   <h4>Gestión de Productos</h4>
-  <a href="/admin/body-part/new" on:click|preventDefault={() => navigate(`/admin/body-part/new`)} class="btn btn-success">Agregar Registro</a>
 </div>
 
 <div class="card border-0">

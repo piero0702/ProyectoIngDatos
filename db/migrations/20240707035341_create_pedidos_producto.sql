@@ -1,6 +1,6 @@
 -- migrate:up
 CREATE TABLE pedidos_productos (
-  id INT PRIMARY KEY,
+  id INTEGER PRIMARY KEY,
   pedido_id INT,
   producto_id INT,
   tipoProducto_id INT,

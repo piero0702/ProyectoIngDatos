@@ -183,6 +183,9 @@ def tamanios_list():
     finally:
         session.close()
 
+
+
+#CUPON = LISTA + ELIMINAR + GRABAR
 @api.route('/cupones/list', methods=['GET'])
 def cupones_list():
     Session = sessionmaker(bind=engine)
@@ -306,7 +309,7 @@ def distritos_list():
 
 
 
-#PRODUCTOS
+#PRODUCTOS + ELIMINAR + GRABAR
 @api.route('/productos/list', methods=['GET'])
 def productos_list():
     Session = sessionmaker(bind=engine)
@@ -344,7 +347,7 @@ def productos_list():
     finally:
         session.close()
 
-#CLIENTES
+#CLIENTES + ELIMINAR + GRABAR
 @api.route('/clientes/list', methods=['GET'])
 def clientes_list():
     Session = sessionmaker(bind=engine)
@@ -464,7 +467,7 @@ def cliente_grabar():
     finally:
         session.close()
 
-#PEDIDOS
+#PEDIDOS + ELIMINAR + GRABAR
 @api.route('/pedidos/list', methods=['GET'])
 def pedidos_list():
     Session = sessionmaker(bind=engine)
@@ -601,8 +604,109 @@ JOIN distritos dt ON d.distrito_id = dt.id;
 
 
 
+
+
+
+
+
+
+#CUPON = LISTA + ELIMINAR + GRABAR
 @api.route('/pedidos_productos/list', methods=['GET'])
 def pedidos_productos_list():
+    Session = sessionmaker(bind=engine)
+    session = Session()
+    try:
+        with engine.connect() as connection:
+            query = text("""
+                SELECT * FROM pedidos_productos;
+            """)
+            result = connection.execute(query)
+            rows = result.fetchall()
+            if rows:
+                resp = [{
+                    'id': r[0],
+                    'pedido_id': r[1],
+                    'producto_id': r[2],
+                    'tipoProducto_id': r[3]
+                } for r in rows]
+                return json.dumps(resp)
+            else:
+                return json.dumps({"error": "No se encontraron resultados"}), 404
+    except Exception as e:
+        traceback.print_exc()
+        error_message = "Error desconocido: {}".format(str(e))
+        return json.dumps({"error": error_message}), 500
+    finally:
+        session.close()
+
+
+@api.route('/pedidoProducto/eliminar', methods=['DELETE'])
+def pedidoProducto_eliminar():
+    Session = sessionmaker(bind=engine)
+    session = Session()
+    try:
+        datos = request.get_json()
+        pedidoProducto_id = datos.get('id')
+
+        if not pedidoProducto_id:
+            return json.dumps({"error": "Se requiere proporcionar un ID de pedido"}), 400
+
+        # Eliminar el pedido de la base de datos
+        query = text("DELETE FROM pedidos_productos WHERE id = :id")
+        session.execute(query, {'id': pedidoProducto_id})
+        session.commit()
+
+        return json.dumps({"mensaje": "Pedido eliminado correctamente"}), 200
+
+    except Exception as e:
+        traceback.print_exc()
+        error_message = "Error al eliminar el pedido: {}".format(str(e))
+        return json.dumps({"error": error_message}), 500
+
+    finally:
+        session.close()
+
+
+@api.route('/pedidoProducto/grabar', methods=['POST'])
+def pedidoProducto_grabar():
+    Session = sessionmaker(bind=engine)
+    session = Session()
+    try:
+        datos = request.get_json()
+
+        pedido_id = datos.get('pedido_id')
+        producto_id = datos.get('producto_id')
+        tipoProducto_id = datos.get('tipoProducto_id')
+
+        if pedido_id is None or producto_id is None or tipoProducto_id is None:
+            return json.dumps({"error": "Se requiere proporcionar pedido_id, producto_id y tipoProducto_id"}), 400
+
+        query = text("""
+            INSERT INTO pedidos_productos (pedido_id, producto_id, tipoProducto_id) 
+            VALUES (:pedido_id, :producto_id, :tipoProducto_id)
+        """)
+        result = session.execute(query, {
+            'pedido_id': pedido_id,
+            'producto_id': producto_id,
+            'tipoProducto_id': tipoProducto_id
+        })
+
+        session.commit()
+
+        return json.dumps({"mensaje": "Pedido producto agregado correctamente"}), 200
+
+    except Exception as e:
+        traceback.print_exc()
+        error_message = "Error desconocido: {}".format(str(e))
+        return json.dumps({"error": error_message}), 500
+
+    finally:
+        session.close()
+
+
+#MOSTRAR
+@api.route('/mostrar_pedidos_productos/list', methods=['GET'])
+def mostrar_pedidos_productos_list():
     Session = sessionmaker(bind=engine)
     session = Session()
     try:

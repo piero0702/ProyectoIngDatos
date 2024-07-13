@@ -23,18 +23,65 @@
         console.error('Error en la solicitud:', error);
       });
   }
-</script>
 
-<style>
-  /* Estilos opcionales para personalizar la apariencia */
-</style>
+  const deletepedidoProducto = (id) => {
+    if (confirm("¿Estás seguro de que quieres eliminar este pedidoProducto?")) {
+      fetch("/pedidoProducto/eliminar", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ id })
+      })
+      .then(response => {
+        if (!response.ok) {
+          return response.json().then(data => { throw new Error(data.error || "Error al eliminar el pedidoProducto"); });
+        }
+        return response.json();
+      })
+      .then(data => {
+        // Actualizar pedidoProductos después de eliminar el pedidoProducto
+        PedidosProductos = PedidosProductos.filter(pedidoProducto => pedidoProducto.id !== id);
+        console.log(data.mensaje);
+      })
+      .catch(error => {
+        console.error("Error al eliminar el pedidoProducto:", error);
+        alert(error.message || "Error al eliminar el pedidoProducto. Por favor, inténtelo de nuevo.");
+      });
+    }
+  }
+
+  const agregarpedidoProducto = async (datospedidoProducto) => {
+    try {
+      const opciones = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(datospedidoProducto)
+      };
+
+      const response = await fetch("/pedidoProducto/grabar", opciones);
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error("Error en la solicitud: " + errorData.error);
+      }
+
+      // Actualizar la lista de pedidoProductos después de agregar uno nuevo
+      fetchPedidosProductos();
+
+      console.log("pedidoProducto agregado correctamente");
+
+    } catch (error) {
+      console.error("Error al agregar el pedidoProducto:", error);
+      alert("Error al intentar agregar pedidoProducto. Por favor, inténtelo de nuevo.");
+    }
+  }
+</script>
 
 <div class="mb-3">
   <h4>Gestión de Productos de Pedidos</h4>
-  <a href="/admin/pedidosproductos/new" on:click|preventDefault={() => navigate(`/admin/pedidosproductos/new`)} class="btn btn-success">Agregar Producto de Pedido</a>
+  <a href="/admin/pedidosproductos/nuevo" on:click|preventDefault={() => navigate(`/admin/pedidosproductos/nuevo`)} class="btn btn-success">Agregar Producto de Pedido</a>
 </div>
 
-<!-- Table Element -->
 <div class="card border-0">
   <div class="card-header">
     <h5 class="card-title">Productos de Pedidos</h5>
@@ -47,6 +94,7 @@
           <th scope="col">Pedido ID</th>
           <th scope="col">Producto ID</th>
           <th scope="col">Tipo de Producto ID</th>
+          <th scope="col">Acciones</th>
         </tr>
       </thead>
       <tbody>
@@ -56,6 +104,10 @@
             <td>{pedidoProducto.pedido_id}</td>
             <td>{pedidoProducto.producto_id}</td>
             <td>{pedidoProducto.tipoProducto_id}</td>
+            <td>
+              <a href="/admin/pedidoProducto/editar/{pedidoProducto.id}" on:click|preventDefault={() => navigate(`/admin/pedidoProducto/editar/${pedidoProducto.id}`)} class="btn btn-danger">Editar</a>
+              <button on:click|preventDefault={() => deletepedidoProducto(pedidoProducto.id)} class="btn btn-secondary">Eliminar</button>
+            </td>
           </tr>
         {/each}
       </tbody>

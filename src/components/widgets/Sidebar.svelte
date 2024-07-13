@@ -47,14 +47,6 @@
             Lista de distritos
           </a>
         </li>
-      
-
-        
-
-
-
-       
-
         <li class="sidebar-item">
           <a class="sidebar-link" href="/admin/tipos" on:click|preventDefault={() => {navigate('/admin/tipos')}}>
             Lista de Tipos
@@ -120,6 +112,27 @@
 
         </ul>
       </li>
+
+      <li class="sidebar-item">
+        <a class="sidebar-link" href="/" on:click|preventDefault={() => {navigate('/')}}>
+          Mostrar Listas
+        </a>
+      </li>
+      <li class="sidebar-item">
+        <a href="#" class="sidebar-link collapsed" data-bs-target="#mostrar" data-bs-toggle="collapse"
+            aria-expanded="false"><i class="fa-solid fa-file-lines pe-2"></i>
+            Mostrar Lista
+        </a>
+
+      <ul id="mostrar" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+        
+        <li class="sidebar-item">
+          <a class="sidebar-link" href="/admin/mostrarPedidoProducto" on:click|preventDefault={() => {navigate('/admin/mostrarPedidoProducto')}}>
+            Lista de Pedidos de Clientes
+          </a>
+        </li>
+      </ul>
+    </li>
 
     </ul>
   </div>
