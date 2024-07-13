@@ -1,6 +1,6 @@
 -- migrate:up
 CREATE TABLE cupones (
-  id INT PRIMARY KEY,
+  id INTEGER PRIMARY KEY,
   codigo VARCHAR(15),
   porcentajeDsct FLOAT
 );

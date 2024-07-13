@@ -51,7 +51,7 @@
   
   <div class="mb-3">
     <h4>Gestión de Direcciones</h4>
-    <a href="/admin/direccion/new" on:click|preventDefault={() => navigate(`/admin/direccion/new`)} class="btn btn-success">Agregar Dirección</a>
+
   </div>
   
   <!-- Table Element -->

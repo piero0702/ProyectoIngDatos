@@ -211,6 +211,71 @@ def cupones_list():
     finally:
         session.close()
 
+@api.route('/cupon/eliminar', methods=['DELETE'])
+def cupon_eliminar():
+    Session = sessionmaker(bind=engine)
+    session = Session()
+    try:
+        datos = request.get_json()
+        cupon_id = datos.get('id')
+
+        if not cupon_id:
+            return json.dumps({"error": "Se requiere proporcionar un ID de cupón"}), 400
+
+        # Eliminar el cupón de la base de datos
+        query = text("DELETE FROM cupones WHERE id = :id")
+        session.execute(query, {'id': cupon_id})
+        session.commit()
+
+        return json.dumps({"mensaje": "Cupón eliminado correctamente"}), 200
+
+    except Exception as e:
+        traceback.print_exc()
+        error_message = "Error al eliminar el cupón: {}".format(str(e))
+        return json.dumps({"error": error_message}), 500
+
+    finally:
+        session.close()
+
+
+
+@api.route('/cupon/grabar', methods=['POST'])
+def cupon_grabar():
+    Session = sessionmaker(bind=engine)
+    session = Session()
+    try:
+        datos = request.get_json()
+
+        # Verificar que se reciben los datos esperados
+        codigo = datos.get('codigo')
+        porcentajeDsct = datos.get('porcentajeDsct')
+
+        if codigo is None or porcentajeDsct is None:
+            return json.dumps({"error": "Se requiere proporcionar código y porcentaje de descuento"}), 400
+
+        # Insertar el cupón en la base de datos
+        query = text("""
+            INSERT INTO cupones (codigo, porcentajeDsct) 
+            VALUES (:codigo, :porcentajeDsct)
+        """)
+        result = session.execute(query, {
+            'codigo': codigo,
+            'porcentajeDsct': porcentajeDsct
+        })
+
+        session.commit()
+
+        return json.dumps({"id": result.lastrowid}), 200
+
+    except Exception as e:
+        traceback.print_exc()
+        error_message = "Error desconocido: {}".format(str(e))
+        return json.dumps({"error": error_message}), 500
+
+    finally:
+        session.close()
+
+
 @api.route('/distritos/list', methods=['GET'])
 def distritos_list():
     Session = sessionmaker(bind=engine)
