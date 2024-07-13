@@ -539,7 +539,7 @@ def pedido_grabar():
         cupon_id = datos.get('cupon_id')
         cliente_id = datos.get('cliente_id')  # Asegúrate de obtener el cliente_id si es necesario
 
-        # Verificar que se reciben estos IDs
+        # Verificar que se reciben estos IDss
         if tipoEntrega_id is None or cupon_id is None:
             return json.dumps({"error": "Se requiere proporcionar tipoEntrega_id y cupon_id"}), 400
         
