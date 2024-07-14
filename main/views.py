@@ -39,6 +39,7 @@ def home():
 @view.route('/admin/colores',methods=['GET'])
 @view.route('/admin/tamanios',methods=['GET'])
 @view.route('/admin/cupones',methods=['GET'])
+@view.route('/admin/cupones/edit/<param>', methods=['GET'])
 @view.route('/admin/distritos',methods=['GET'])
 @view.route('/admin/direcciones',methods=['GET'])
 @view.route('/admin/pedidosProductos',methods=['GET'])
@@ -46,7 +47,7 @@ def home():
 @view.route('/admin/mostrarPedidoProducto',methods=['GET'])
 @view.route('/admin/pagos',methods=['GET'])
 @view.route('/admin', methods=['GET'])
-def app():
+def app(param=0):
   locals = {}
   locals['title'] = 'Panel de Administración'
   locals['csss'] = ['dist/app']

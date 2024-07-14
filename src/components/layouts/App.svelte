@@ -110,6 +110,9 @@
 
 					<Route path="/cupones" component={Cupones} />
 					<Route path="/cupon/nuevo" component={CuponDetalle} />
+					<Route path="/cupones/edit/:id" let:params>
+						<CuponDetalle cuponId={params.id} />
+					</Route>
 				</Router>
 			</div>
 		</main>
