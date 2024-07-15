@@ -22,17 +22,25 @@
     <div class="carousel-item active">
       <img src="https://fluye-statics.s3.amazonaws.com/banners/Cups_1920x700.jpg" class="d-block w-100" alt="...">
       <div class="carousel-caption d-none d-md-block">
-        <h5>First Slide</h5>
-        <p>Some representative placeholder content for the first slide.</p>
+        
+        <p></p>
       </div>
     </div>
     <div class="carousel-item">
-      <img src="https://scontent.flim15-2.fna.fbcdn.net/v/t39.30808-6/438729765_822937256519837_3677215015024177512_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=YJHh-6GOfMIQ7kNvgEXJsNN&_nc_ht=scontent.flim15-2.fna&oh=00_AYAvJgnjTwSCaVdChMEUGW5IrvArrdBZ231tlYjO45Dnmw&oe=668F53ED" class="d-block w-100" alt="...">
+      <img src="https://fluye-statics.s3.amazonaws.com/abouts/Artboard_1_copy_6.jpg" class="d-block w-100" alt="...">
       <div class="carousel-caption d-none d-md-block">
-        <h5>Second Slide</h5>
-        <p>Some representative placeholder content for the second slide.</p>
+        <p></p>
       </div>
     </div>
+    <div class="carousel-item">
+      <img src="https://fluye-statics.s3.amazonaws.com/abouts/1440x700_corportavivo-desktop.jpg" class="d-block w-100" alt="...">
+      <div class="carousel-caption d-none d-md-block">
+          <div class="flex-center flex-col" style="margin-top: -650px; text-align: center;">
+              <h1 style="font-size: 48px; font-weight: bold;">Corporativo | Fluye Bottle</h1>
+              <p style="font-size: 18px;">Una Fluye perfecta para fomentar un estilo de vida saludable en tu empresa, colaboradores y clientes.</p>
+          </div>
+      </div>
+  </div>  
   </div>
   <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -53,8 +61,8 @@
           <div class="icon bg-primary text-white rounded-circle mb-3">
             <i class="bi bi-briefcase-fill"></i>
           </div>
-          <h3 class="h4">¡Somos más que una bottle!</h3>
-          <p>Al comprar una botella reutilizable Fluye estás comprando practicidad y elegancia a tu estilo con los mejores productos sostenibles. Por cada Fluye que compras, reduces el uso de plásticos en tu vida diaria, y aportas a una ONG con impacto social y medioambiental. ¿Ya tienes tu FLUYE BOTTLE favorita?
+          <h3 class="h4">Sobre Nosotros</h3>
+          <p>En octubre de 2017, fundamos Fluye con la misión de abordar la contaminación ambiental causada por el uso desmedido de plástico. Hartos de presenciar la degradación de nuestro entorno natural debido a botellas y envases plásticos, decidimos aportar nuestra solución. 
           </p>
         </div>
       </div>
@@ -63,8 +71,9 @@
           <div class="icon bg-primary text-white rounded-circle mb-3">
             <i class="bi bi-card-checklist"></i>
           </div>
-          <h3 class="h4">Feature Two</h3>
-          <p>Some representative placeholder content for the second feature.</p>
+          <h3 class="h4">¡Somos más que una bottle!</h3>
+          <p>Al comprar una botella reutilizable Fluye estás comprando practicidad y elegancia a tu estilo con los mejores productos sostenibles. Por cada Fluye que compras, reduces el uso de plásticos en tu vida diaria, y aportas a una ONG con impacto social y medioambiental. ¿Ya tienes tu FLUYE BOTTLE favorita?
+          </p>
         </div>
       </div>
       <div class="col-lg-4">
@@ -72,8 +81,9 @@
           <div class="icon bg-primary text-white rounded-circle mb-3">
             <i class="bi bi-bar-chart-fill"></i>
           </div>
-          <h3 class="h4">Feature Three</h3>
-          <p>Some representative placeholder content for the third feature.</p>
+          <h3 class="h4">Nuestra promesa</h3>
+          <p>En el fascinante mundo de Fluye, la perfección es la esencia misma de nuestra filosofía. Nos esforzamos incansablemente para garantizar que cada Fluye no sólo sea una experiencia, sino una expresión de excelencia. Nos enorgullece no solo crear productos de calidad inigualable, sino también abrazar nuestro papel activo en la preservación del planeta.
+          </p>
         </div>
       </div>
     </div>
@@ -95,5 +105,5 @@
 
 <!-- Footer -->
 <footer class="bg-dark text-white text-center py-4">
-  <p class="mb-0">© 2024 Your Brand. All rights reserved.</p>
+  <p class="mb-0"></p>
 </footer>

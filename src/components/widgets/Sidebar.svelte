@@ -29,22 +29,22 @@
         
         <li class="sidebar-item">
           <a class="sidebar-link" href="/admin/colores" on:click|preventDefault={() => {navigate('/admin/colores')}}>
-            Lista de colores
+            Lista de Colores
           </a>
         </li>
         <li class="sidebar-item">
           <a class="sidebar-link" href="/admin/tamanios" on:click|preventDefault={() => {navigate('/admin/tamanios')}}>
-            Lista de tamanios
+            Lista de Tamaños
           </a>
         </li>
         <li class="sidebar-item">
           <a class="sidebar-link" href="/admin/cupones" on:click|preventDefault={() => {navigate('/admin/cupones')}}>
-            Lista de cupones
+            Lista de Cupones
           </a>
         </li>
         <li class="sidebar-item">
           <a class="sidebar-link" href="/admin/distritos" on:click|preventDefault={() => {navigate('/admin/distritos')}}>
-            Lista de distritos
+            Lista de Distritos
           </a>
         </li>
         <li class="sidebar-item">
@@ -98,7 +98,7 @@
 
           <li class="sidebar-item">
             <a class="sidebar-link" href="/admin/direcciones" on:click|preventDefault={() => {navigate('/admin/direcciones')}}>
-              Lista de direcciones
+              Lista de Direcciones
             </a>
           </li>
 

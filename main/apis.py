@@ -129,6 +129,7 @@ def tiposProductos_list():
   finally:
     session.close()
 
+#LISTA DE COLORES
 @api.route('/colores/list', methods=['GET'])
 def colores_list():
     Session = sessionmaker(bind=engine)
@@ -156,6 +157,7 @@ def colores_list():
     finally:
         session.close()
 
+#LISTA DE TAMANIOS
 @api.route('/tamanios/list', methods=['GET'])
 def tamanios_list():
     Session = sessionmaker(bind=engine)
@@ -213,6 +215,7 @@ def cupones_list():
         return json.dumps({"error": error_message}), 500
     finally:
         session.close()
+
 
 @api.route('/cupones/fetch-one', methods=['GET'])
 def cupones_fetchOne():
@@ -323,7 +326,7 @@ def cupon_grabar():
         session.close()  # Cerrar la sesión de base de datos al finalizar la operación
 
 
-
+#LISTA DE DISTRITOS
 @api.route('/distritos/list', methods=['GET'])
 def distritos_list():
     Session = sessionmaker(bind=engine)
@@ -338,8 +341,7 @@ def distritos_list():
                 for r in rows:
                     tmp = {
                         'id': r[0],
-                        'nombre': r[1],
-                        
+                        'nombre': r[1],                  
                     }
                     resp.append(tmp)
                 return json.dumps(resp)
@@ -354,7 +356,7 @@ def distritos_list():
 
 
 
-#PRODUCTOS + ELIMINAR
+#LISTA DE PRODUCTOS + ELIMINAR
 @api.route('/productos/list', methods=['GET'])
 def productos_list():
     Session = sessionmaker(bind=engine)
@@ -377,7 +379,6 @@ FROM productos p
 INNER JOIN tipos t ON p.tipo_id = t.id
 INNER JOIN colores c ON p.color_id = c.id
 INNER JOIN tamanios tm ON p.tamano_id = tm.id;
-
             """)
             result = connection.execute(query)
             rows = result.fetchall()
@@ -434,7 +435,7 @@ def producto_eliminar():
         session.close()
 
 
-#CLIENTES + ELIMINAR + GRABAR
+#LISTA DE CLIENTES + ELIMINAR + GRABAR
 @api.route('/clientes/list', methods=['GET'])
 def clientes_list():
     Session = sessionmaker(bind=engine)
@@ -657,7 +658,7 @@ def pedido_grabar():
         session.close()
 
 
-
+#LISTA DE DIRECCIONES
 @api.route('/direcciones/list', methods=['GET'])
 def direcciones_list():
     Session = sessionmaker(bind=engine)
@@ -687,14 +688,6 @@ JOIN distritos dt ON d.distrito_id = dt.id;
         return json.dumps({"error": error_message}), 500
     finally:
         session.close()
-
-
-
-
-
-
-
-
 
 
 #CUPON = LISTA + ELIMINAR + GRABAR
