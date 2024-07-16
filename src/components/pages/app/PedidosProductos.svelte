@@ -92,8 +92,8 @@
         <tr>
           <th scope="col">ID</th>
           <th scope="col">Pedido ID</th>
-          <th scope="col">Producto ID</th>
-          <th scope="col">Tipo de Producto ID</th>
+          <th scope="col">Producto</th>
+          <th scope="col">Tipo de Producto</th>
           <th scope="col">Acciones</th>
         </tr>
       </thead>

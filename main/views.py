@@ -46,6 +46,7 @@ def home():
 @view.route('/admin/direcciones',methods=['GET'])
 @view.route('/admin/pedidosProductos',methods=['GET'])
 @view.route('/admin/pedidosProductos/nuevo',methods=['GET'])
+@view.route('/admin/pedidosProductos/editar/<param>', methods=['GET'])
 @view.route('/admin/mostrarPedidoProducto',methods=['GET'])
 @view.route('/admin/pagos',methods=['GET'])
 @view.route('/admin', methods=['GET'])

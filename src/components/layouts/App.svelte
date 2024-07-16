@@ -97,6 +97,9 @@
 						path="/pedidosproductos/nuevo"
 						component={PedidosProductoDetalle}
 					/>
+					<Route path="/pedidosProductos/editar/:id" let:params>
+						<PedidosDetalle pedidoProductosId={params.id} />
+					</Route>
 					<Route
 						path="/mostrarPedidoProducto"
 						component={MostrarPedidoProducto}

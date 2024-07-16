@@ -832,6 +832,37 @@ def pedidos_productos_list():
     try:
         with engine.connect() as connection:
             query = text("""
+                SELECT pedidos_productos.id, pedidos.id, productos.descripcion, tiposProducto.nombre 
+FROM pedidos_productos INNER JOIN pedidos ON pedidos_productos.id = pedidos.id 
+INNER JOIN productos ON pedidos_productos.producto_id = productos.id
+INNER JOIN tiposProducto ON pedidos_productos.tipoProducto_id = tiposProducto.id;
+            """)
+            result = connection.execute(query)
+            rows = result.fetchall()
+            if rows:
+                resp = [{
+                    'id': r[0],
+                    'pedido_id': r[1],
+                    'producto_id': r[2],
+                    'tipoProducto_id': r[3]
+                } for r in rows]
+                return json.dumps(resp)
+            else:
+                return json.dumps({"error": "No se encontraron resultados"}), 404
+    except Exception as e:
+        traceback.print_exc()
+        error_message = "Error desconocido: {}".format(str(e))
+        return json.dumps({"error": error_message}), 500
+    finally:
+        session.close()
+
+@api.route('/pedidos_productos/fetch_one', methods=['GET'])
+def pedidos_productos_fetch_one():
+    Session = sessionmaker(bind=engine)
+    session = Session()
+    try:
+        with engine.connect() as connection:
+            query = text("""
                 SELECT * FROM pedidos_productos;
             """)
             result = connection.execute(query)
@@ -852,6 +883,7 @@ def pedidos_productos_list():
         return json.dumps({"error": error_message}), 500
     finally:
         session.close()
+
 
 
 @api.route('/pedidoProducto/eliminar', methods=['DELETE'])
