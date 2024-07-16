@@ -114,8 +114,8 @@
             <td>{cliente.nroDocumento}</td>
             <td>{cliente.email}</td>
             <td>{cliente.contrasenia}</td>
-            <td>{cliente.tipo_documento}</td>
-            <td>{cliente.distrito}</td>
+            <td>{cliente.tipoDocumento}</td>
+            <td>{cliente.direccion}</td>
             <td>
               <a href="/admin/cliente/editar/{cliente.id}" on:click|preventDefault={() => navigate(`/admin/cliente/editar/${cliente.id}`)} class="btn btn-danger">Editar</a>
               <button on:click|preventDefault={() => deleteCliente(cliente.id)} class="btn btn-secondary">Eliminar</button>

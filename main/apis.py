@@ -443,18 +443,21 @@ def clientes_list():
     try:
         query = text("""
             SELECT 
-    c.id,
-    c.nombres AS nombre,
-    c.apellidos AS apellido,
-    c.telefono,
-    c.nroDocumento,
-    c.email,
-    c.contrasenia,
-    c.tipoDocumento_id,  -- Solo el id de tipoDocumento
-    c.direccion_id       -- Solo el id de dirección
-FROM clientes c
-JOIN tiposDocumento td ON c.tipoDocumento_id = td.id
-JOIN direcciones d ON c.direccion_id = d.id;
+    C.id, 
+    C.nombres, 
+    C.apellidos, 
+    C.telefono, 
+    C.nroDocumento, 
+    C.email, 
+    C.contrasenia, 
+    T.nombre AS tipoDocumento, 
+    D.direccionEntrega as direccion 
+FROM 
+    clientes C 
+INNER JOIN 
+    tiposDocumento T ON C.tipoDocumento_id = T.id
+INNER JOIN 
+    direcciones D ON D.id = C.direccion_id;
         """)
         result = session.execute(query)
         rows = result.fetchall()
@@ -469,9 +472,8 @@ JOIN direcciones d ON c.direccion_id = d.id;
                     'nroDocumento': r[4],
                     'email': r[5],
                     'contrasenia': r[6],
-                    'tipo_documento': r[7],
-                    'distrito': r[8],
-                    # Puedes agregar más campos según sea necesario
+                    'tipoDocumento': r[7],
+                    'direccion': r[8],
                 }
                 resp.append(tmp)
             return json.dumps(resp)
