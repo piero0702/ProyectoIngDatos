@@ -8,6 +8,37 @@ from main.database import engine
 api = Blueprint('api', __name__)
 
 
+
+
+@api.route('/tiposDocumento/list', methods=['GET'])
+def tiposDocumento_list():
+  Session = sessionmaker(bind=engine)
+  session = Session()
+  try:
+    with engine.connect() as connection:
+      query = text("SELECT * FROM tiposDocumento;")
+      result = connection.execute(query)
+      # Obtener el primer resultado
+      rows = result.fetchall()
+      if rows:
+        resp = []
+        print(rows)
+        for r in rows:
+          tmp = {
+            'id': r[0],
+            'nombre': r[1]
+          }
+          resp.append(tmp)
+        return json.dumps(resp)
+      else:
+          return json.dumps({"error": "No se encontraron resultados"}), 404
+  except Exception as e:
+    traceback.print_exc()
+    error_message = "Error desconocido: {}".format(str(e))
+    return json.dumps({"error": error_message}), 500
+  finally:
+    session.close()
+
 #TIPOS DE PRODUCTOS
 @api.route('/tipos/list', methods=['GET'])
 def tipos_list():
@@ -513,6 +544,39 @@ def cliente_eliminar():
     finally:
         session.close()
 
+@api.route('/cliente/fetch-one', methods=['GET'])
+def cliente_fetchOne():
+    Session = sessionmaker(bind=engine)
+    session = Session()
+    try:
+        with engine.connect() as connection:
+            query = text("SELECT * FROM clientes where id = :id;")
+            result = connection.execute(query, {'id': request.args.get('id')})
+            rows = result.fetchall()
+            if rows:
+                resp = []
+                for r in rows:
+                    tmp = {
+                        'id': r[0],
+                        'nombres': r[1],
+                        'apellidos': r[2],
+                        'telefono': r[3],
+                        'nroDocumento': r[4],
+                        'email': r[5],
+                        'contrasenia': r[6],
+                        'tipoDocumento_id': r[7],
+                        'direccion_id': r[8]
+                    }
+                    resp.append(tmp)
+                return json.dumps(resp[0])
+            else:
+                return json.dumps({"error": "No se encontraron resultados"}), 404
+    except Exception as e:
+        traceback.print_exc()
+        error_message = "Error desconocido: {}".format(str(e))
+        return json.dumps({"error": error_message}), 500
+    finally:
+        session.close()
 
 @api.route('/cliente/grabar', methods=['POST'])
 def cliente_grabar():
@@ -524,26 +588,45 @@ def cliente_grabar():
         # Obtener los IDs de tipoDocumento y dirección desde datos
         tipoDocumento_id = datos.get('tipoDocumento_id')
         direccion_id = datos.get('direccion_id')
+        clienteId = datos.get("clienteId")
 
         # Verificar que se reciben estos IDs
         if tipoDocumento_id is None or direccion_id is None:
             return json.dumps({"error": "Se requiere proporcionar tipoDocumento_id y direccion_id"}), 400
-
-        # Insertar el cliente en la base de datos
-        query = text("""
-            INSERT INTO clientes (nombres, apellidos, telefono, nroDocumento, email, contrasenia, tipoDocumento_id, direccion_id) 
-            VALUES (:nombres, :apellidos, :telefono, :nroDocumento, :email, :contrasenia, :tipoDocumento_id, :direccion_id)
-        """)
-        result = session.execute(query, {
-            'nombres': datos['nombres'],
-            'apellidos': datos['apellidos'],
-            'telefono': datos['telefono'],
-            'nroDocumento': datos['nroDocumento'],
-            'email': datos['email'],
-            'contrasenia': datos['contrasenia'],
-            'tipoDocumento_id': tipoDocumento_id,
-            'direccion_id': direccion_id
-        })
+        
+        if clienteId == 'E':
+            # Insertar el cliente en la base de datos
+            query = text("""
+                INSERT INTO clientes (nombres, apellidos, telefono, nroDocumento, email, contrasenia, tipoDocumento_id, direccion_id) 
+                VALUES (:nombres, :apellidos, :telefono, :nroDocumento, :email, :contrasenia, :tipoDocumento_id, :direccion_id)
+            """)
+            result = session.execute(query, {
+                'nombres': datos['nombres'],
+                'apellidos': datos['apellidos'],
+                'telefono': datos['telefono'],
+                'nroDocumento': datos['nroDocumento'],
+                'email': datos['email'],
+                'contrasenia': datos['contrasenia'],
+                'tipoDocumento_id': tipoDocumento_id,
+                'direccion_id': direccion_id
+            })
+        else:
+            query = text("""
+UPDATE clientes SET nombres = :nombres, apellidos = :apellidos, telefono = :telefono, nroDocumento = :nroDocumento,
+                         email = :email, contrasenia = :contrasenia, tipoDocumento_id = :tipoDocumento_id, direccion_id = :direccion_id
+                         WHERE id = :clienteId
+""")
+            result = session.execute(query, {
+                'clienteId': clienteId,
+                'nombres': datos['nombres'],
+                'apellidos': datos['apellidos'],
+                'telefono': datos['telefono'],
+                'nroDocumento': datos['nroDocumento'],
+                'email': datos['email'],
+                'contrasenia': datos['contrasenia'],
+                'tipoDocumento_id': tipoDocumento_id,
+                'direccion_id': direccion_id
+            })
 
         session.commit()
 

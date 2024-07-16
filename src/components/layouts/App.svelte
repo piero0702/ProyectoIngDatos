@@ -104,6 +104,9 @@
 
 					<Route path="/clientes" component={Clientes} />
 					<Route path="/cliente/nuevo" component={ClienteDetalle} />
+					<Route path="/cliente/editar/:id" let:params>
+						<ClienteDetalle clienteId={params.id} />
+					</Route>
 
 					<Route path="/pedidos" component={Pedidos} />
 					<Route path="/pedido/nuevo" component={PedidosDetalle} />

@@ -1,22 +1,80 @@
 <script>
+    import { onMount } from "svelte";
     import { navigate } from "svelte-routing";
+    export let clienteId = 'E';
     let nombres = "";
     let apellidos = "";
     let telefono = "";
     let nroDocumento = "";
     let email = "";
     let contrasenia = "";
-    let tipoDocumentoId = "";  // Cambio a tipoDocumentoId en lugar de tipoDocumento
-    let direccionId = "";  // Cambio a direccionId en lugar de direccionEntrega
+    let tipoDocumento_id = "";
+    let direccion_id = "";
     let mensajeExito = "";
+    let cliente = [];
+    let tiposDeDocumento = [];
+    let direcciones = []
+
+    onMount(async () => {
+        await obtenerClientePorId();
+        await obtenerDocumentos();
+        await obtenerDirecciones();
+    });
+
+    async function obtenerDirecciones() {
+        try {
+            const respuesta = await fetch(`/direcciones/list`);
+            if (!respuesta.ok) {
+                throw new Error("Error en la solicitud: " + respuesta.status);
+            }
+            direcciones = await respuesta.json();
+            console.log(direcciones);
+        } catch (error) {
+            console.error("Error en la solicitud:", error);
+        }
+    }
+
+    async function obtenerDocumentos() {
+        try {
+            const respuesta = await fetch(`/tiposDocumento/list`);
+            if (!respuesta.ok) {
+                throw new Error("Error en la solicitud: " + respuesta.status);
+            }
+            tiposDeDocumento = await respuesta.json();
+            console.log(tiposDeDocumento);
+        } catch (error) {
+            console.error("Error en la solicitud:", error);
+        }
+    }
+
+    async function obtenerClientePorId() {
+        try {
+            const respuesta = await fetch(`/cliente/fetch-one?id=${clienteId}`);
+            if (!respuesta.ok) {
+                throw new Error("Error en la solicitud: " + respuesta.status);
+            }
+            cliente = await respuesta.json();
+            nombres = cliente.nombres;
+            apellidos = cliente.apellidos;
+            telefono = cliente.telefono;
+            nroDocumento = cliente.nroDocumento;
+            email = cliente.email;
+            contrasenia = cliente.contrasenia;
+            tipoDocumento_id = cliente.tipoDocumento_id;
+            direccion_id = cliente.direccion_id;
+            console.log(cliente);
+        } catch (error) {
+            console.error("Error en la solicitud:", error);
+        }
+    }
 
     async function grabar() {
         try {
-            if (nombres.trim() === "" || apellidos.trim() === "" || telefono.trim() === "" || nroDocumento.trim() === "" || email.trim() === "" || contrasenia.trim() === "" || tipoDocumentoId.trim() === "" || direccionId.trim() === "") {
+            if (nombres.trim() === "" || apellidos.trim() === "" || telefono.trim() === "" || nroDocumento.trim() === "" || email.trim() === "" || contrasenia.trim() === "") {
                 throw new Error('Por favor complete todos los campos');
             }
 
-            const datos = { nombres, apellidos, telefono, nroDocumento, email, contrasenia, tipoDocumento_id: tipoDocumentoId, direccion_id: direccionId };
+            const datos = { clienteId, nombres, apellidos, telefono, nroDocumento, email, contrasenia, tipoDocumento_id, direccion_id };
             const opciones = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -32,7 +90,6 @@
             const data = await response.json();
             console.log("Respuesta del servidor:", data);
 
-            // Mostrar mensaje de éxito
             mostrarMensajeExito();
 
         } catch (error) {
@@ -48,7 +105,7 @@
 
 <div class="container">
     <div class="mb-3">
-        <h4>Nuevo Cliente</h4>
+        <h4>{#if clienteId == 'E'} Crear {:else} Editar {/if} Cliente</h4>
     </div>
 
     <div class="card border-0">
@@ -89,19 +146,28 @@
                     <input type="password" class="form-control" id="contrasenia" placeholder="Contraseña del cliente" bind:value={contrasenia}>
                 </div>
                 <div class="form-group">
-                    <label for="tipoDocumentoId">Tipo de Documento ID</label>
-                    <input type="text" class="form-control" id="tipoDocumentoId" placeholder="ID del Tipo de Documento" bind:value={tipoDocumentoId}>
+                    <label for="tipoDocumento_id">Tipo de Documento</label>
+                    <select id="tipoDocumento_id" class="form-control" bind:value={tipoDocumento_id}>
+                        <option value="">Seleccione un tipo de documento</option>
+                        {#each tiposDeDocumento as tipo}
+                            <option value={tipo.id}>{tipo.nombre}</option>
+                        {/each}
+                    </select>
                 </div>
                 <div class="form-group">
-                    <label for="direccionId">Dirección ID</label>
-                    <input type="text" class="form-control" id="direccionId" placeholder="ID de la Dirección" bind:value={direccionId}>
+                    <label for="direccion_id">Direccion</label>
+                    <select id="direccion_id" class="form-control" bind:value={direccion_id}>
+                        <option value="">Seleccione una dirección</option>
+                        {#each direcciones as tipo}
+                            <option value={tipo.id}>{tipo.direccionEntrega}</option>
+                        {/each}
+                    </select>
                 </div>
                 <button type="submit" class="btn btn-primary">Agregar Cliente</button>
             </form>
         </div>
     </div>
 
-    <!-- Botón para regresar a la lista de clientes -->
     <div class="mt-3">
         <a href="/admin/clientes" on:click|preventDefault={() => navigate("/admin/clientes")} class="btn btn-secondary">Volver a la lista de clientes</a>
     </div>
