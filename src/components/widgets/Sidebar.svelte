@@ -67,7 +67,7 @@
 
         <li class="sidebar-item">
           <a class="sidebar-link" href="/admin/tiposProductos" on:click|preventDefault={() => {navigate('/admin/tiposProductos')}}>
-            Lista de Tipos de Productos
+            Lista de Añadidos
           </a>
         </li>
       </ul>

@@ -832,7 +832,7 @@ def pedidos_productos_list():
     try:
         with engine.connect() as connection:
             query = text("""
-                SELECT pedidos_productos.id, pedidos.id, productos.descripcion, tiposProducto.nombre 
+                SELECT pedidos_productos.id, pedidos_productos.pedido_id, productos.descripcion, tiposProducto.nombre 
 FROM pedidos_productos INNER JOIN pedidos ON pedidos_productos.id = pedidos.id 
 INNER JOIN productos ON pedidos_productos.producto_id = productos.id
 INNER JOIN tiposProducto ON pedidos_productos.tipoProducto_id = tiposProducto.id;
@@ -923,23 +923,39 @@ def pedidoProducto_grabar():
         pedido_id = datos.get('pedido_id')
         producto_id = datos.get('producto_id')
         tipoProducto_id = datos.get('tipoProducto_id')
+        pedidoProductoId = datos.get('pedidoProductoId')
 
-        if pedido_id is None or producto_id is None or tipoProducto_id is None:
+        if not pedido_id or not producto_id or not tipoProducto_id:
             return json.dumps({"error": "Se requiere proporcionar pedido_id, producto_id y tipoProducto_id"}), 400
 
-        query = text("""
-            INSERT INTO pedidos_productos (pedido_id, producto_id, tipoProducto_id) 
-            VALUES (:pedido_id, :producto_id, :tipoProducto_id)
-        """)
-        result = session.execute(query, {
-            'pedido_id': pedido_id,
-            'producto_id': producto_id,
-            'tipoProducto_id': tipoProducto_id
-        })
+        if pedidoProductoId == 'E':
+            # Insertar en pedidos_productos
+            query = text("""
+                INSERT INTO pedidos_productos (pedido_id, producto_id, tipoProducto_id) 
+                VALUES (:pedido_id, :producto_id, :tipoProducto_id)
+            """)
+            session.execute(query, {
+                'pedido_id': pedido_id,
+                'producto_id': producto_id,
+                'tipoProducto_id': tipoProducto_id
+            })
+        else:
+            # Actualizar en pedidos_productos
+            query = text("""
+                UPDATE pedidos_productos 
+                SET pedido_id = :pedido_id, producto_id = :producto_id, tipoProducto_id = :tipoProducto_id
+                WHERE id = :pedidoProductoId
+            """)
+            session.execute(query, {
+                'pedidoProductoId': pedidoProductoId,
+                'pedido_id': pedido_id,
+                'producto_id': producto_id,
+                'tipoProducto_id': tipoProducto_id
+            })
 
         session.commit()
 
-        return json.dumps({"mensaje": "Pedido producto agregado correctamente"}), 200
+        return json.dumps({"mensaje": "Operación realizada correctamente"}), 200
 
     except Exception as e:
         traceback.print_exc()
@@ -948,6 +964,7 @@ def pedidoProducto_grabar():
 
     finally:
         session.close()
+
 
 
 #MOSTRAR

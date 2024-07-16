@@ -119,7 +119,7 @@ async function grabar() {
 
 <div class="container">
     <div class="mb-3">
-        <h4>{#if clienteId == 'E'} Crear {:else} Editar {/if} Pedido</h4>
+        <h4>{#if pedidoId == 'E'} Agregar {:else} Editar {/if} Pedido</h4>
     </div>
 
     <div class="card border-0">

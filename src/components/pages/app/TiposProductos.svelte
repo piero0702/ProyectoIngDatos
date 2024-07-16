@@ -32,13 +32,13 @@
   <style></style>
   
   <div class="mb-3">
-    <h4>Gestión de Tipos de Productos</h4>
+    <h4>Gestión de Añadidos</h4>
   </div>
   
   <!-- Table Element -->
   <div class="card border-0">
     <div class="card-header">
-      <h5 class="card-title">Tipos de Productos</h5>
+      <h5 class="card-title">Tipos de Añadidos</h5>
     </div>
     <div class="card-body">
       <table class="table">

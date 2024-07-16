@@ -78,13 +78,13 @@
 </script>
 
 <div class="mb-3">
-  <h4>Gestión de Productos de Pedidos</h4>
+  <h4>Gestión de Pedidos de Productos</h4>
   <a href="/admin/pedidosproductos/nuevo" on:click|preventDefault={() => navigate(`/admin/pedidosproductos/nuevo`)} class="btn btn-success">Agregar Producto de Pedido</a>
 </div>
 
 <div class="card border-0">
   <div class="card-header">
-    <h5 class="card-title">Productos de Pedidos</h5>
+    <h5 class="card-title">Pedidos de Productos</h5>
   </div>
   <div class="card-body">
     <table class="table">
@@ -105,7 +105,7 @@
             <td>{pedidoProducto.producto_id}</td>
             <td>{pedidoProducto.tipoProducto_id}</td>
             <td>
-              <a href="/admin/pedidoProducto/editar/{pedidoProducto.id}" on:click|preventDefault={() => navigate(`/admin/pedidoProducto/editar/${pedidoProducto.id}`)} class="btn btn-danger">Editar</a>
+              <a href="/admin/pedidosProductos/editar/{pedidoProducto.id}" on:click|preventDefault={() => navigate(`/admin/pedidosProductos/editar/${pedidoProducto.id}`)} class="btn btn-danger">Editar</a>
               <button on:click|preventDefault={() => deletepedidoProducto(pedidoProducto.id)} class="btn btn-secondary">Eliminar</button>
             </td>
           </tr>
