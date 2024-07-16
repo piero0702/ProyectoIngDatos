@@ -163,7 +163,7 @@
                         {/each}
                     </select>
                 </div>
-                <button type="submit" class="btn btn-primary">Agregar Cliente</button>
+                <button type="submit" class="btn btn-primary">{#if clienteId == 'E'} Crear {:else} Editar {/if} Cliente</button>
             </form>
         </div>
     </div>

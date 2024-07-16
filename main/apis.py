@@ -647,8 +647,13 @@ def pedidos_list():
     session = Session()
     try:
         query = """
-            SELECT id, tipoEntrega_id, cupon_id, cliente_id
-            FROM pedidos
+            SELECT pedidos.id,
+            tiposEntrega.nombre,
+            cupones.codigo, 
+            (clientes.nombres || " " || clientes.apellidos) AS "Nombres y apellidos" 
+        FROM pedidos INNER JOIN tiposEntrega ON pedidos.tipoEntrega_id = tiposEntrega.id 
+        INNER JOIN cupones ON pedidos.cupon_id = cupones.id 
+        INNER JOIN clientes ON pedidos.cliente_id = clientes.id
         """
         result = session.execute(text(query))
         rows = result.fetchall()
@@ -702,6 +707,35 @@ def pedido_eliminar():
     finally:
         session.close()
 
+@api.route('/pedido/fetch-one', methods=['GET'])
+def pedido_fetchOne():
+    Session = sessionmaker(bind=engine)
+    session = Session()
+    try:
+        pedido_id = request.args.get('id')
+        if not pedido_id:
+            return json.dumps({"error": "Se requiere proporcionar un ID de pedido"}), 400
+        
+        query = text("SELECT * FROM pedidos WHERE id = :id")
+        result = session.execute(query, {'id': pedido_id})
+        rows = result.fetchall()
+        if rows:
+            pedido = {
+                'id': rows[0][0],
+                'tipoEntrega_id': rows[0][1],
+                'cupon_id': rows[0][2],
+                'cliente_id': rows[0][3]
+            }
+            return json.dumps(pedido)
+        else:
+            return json.dumps({"error": "No se encontraron resultados"}), 404
+    except Exception as e:
+        traceback.print_exc()
+        error_message = "Error desconocido: {}".format(str(e))
+        return json.dumps({"error": error_message}), 500
+    finally:
+        session.close()
+
 
 @api.route('/pedido/grabar', methods=['POST'])
 def pedido_grabar():
@@ -710,25 +744,38 @@ def pedido_grabar():
     try:
         datos = request.get_json()
 
-        # Obtener los IDs de tipoEntrega y cupon desde datos
+        # Obtener los IDs desde datos
         tipoEntrega_id = datos.get('tipoEntrega_id')
         cupon_id = datos.get('cupon_id')
-        cliente_id = datos.get('cliente_id')  # Asegúrate de obtener el cliente_id si es necesario
+        cliente_id = datos.get('cliente_id')
+        pedidoId = datos.get("pedidoId")
 
-        # Verificar que se reciben estos IDss
-        if tipoEntrega_id is None or cupon_id is None:
-            return json.dumps({"error": "Se requiere proporcionar tipoEntrega_id y cupon_id"}), 400
-        
-        # Insertar el pedido en la base de datos
-        query = text("""
-            INSERT INTO pedidos (tipoEntrega_id, cupon_id, cliente_id) 
-            VALUES (:tipoEntrega_id, :cupon_id, :cliente_id)
-        """)
-        result = session.execute(query, {
-            'tipoEntrega_id': tipoEntrega_id,
-            'cupon_id': cupon_id,
-            'cliente_id': cliente_id  # Asegúrate de pasar el cliente_id si es necesario
-        })
+        # Verificar que se reciben los IDs necesarios
+        if tipoEntrega_id is None or cliente_id is None:
+            return json.dumps({"error": "Se requiere proporcionar tipoEntrega_id y cliente_id"}), 400
+
+        if pedidoId == 'E':
+            # Insertar el pedido en la base de datos
+            query = text("""
+                INSERT INTO pedidos (tipoEntrega_id, cupon_id, cliente_id) 
+                VALUES (:tipoEntrega_id, :cupon_id, :cliente_id)
+            """)
+            result = session.execute(query, {
+                'tipoEntrega_id': tipoEntrega_id,
+                'cupon_id': cupon_id,
+                'cliente_id': cliente_id
+            })
+        else:
+            query = text("""
+UPDATE pedidos SET tipoEntrega_id = :tipoEntrega_id, cupon_id = :cupon_id, cliente_id = :cliente_id
+WHERE id = :pedidoId
+""")
+            result = session.execute(query, {
+                'pedidoId': pedidoId,
+                'tipoEntrega_id': tipoEntrega_id,
+                'cupon_id': cupon_id,
+                'cliente_id': cliente_id
+            })
 
         session.commit()
 
@@ -741,6 +788,8 @@ def pedido_grabar():
 
     finally:
         session.close()
+
+
 
 
 #LISTA DE DIRECCIONES

@@ -97,9 +97,9 @@
       <thead>
         <tr>
           <th scope="col">ID Pedido</th>
-          <th scope="col">Tipo Entrega ID</th>
-          <th scope="col">Cupón ID</th>
-          <th scope="col">Cliente ID</th>
+          <th scope="col">Tipo Entrega</th>
+          <th scope="col">Cupón</th>
+          <th scope="col">Cliente</th>
           <th scope="col">Acciones</th>
         </tr>
       </thead>

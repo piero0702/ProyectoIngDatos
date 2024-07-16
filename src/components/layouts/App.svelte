@@ -111,6 +111,10 @@
 					<Route path="/pedidos" component={Pedidos} />
 					<Route path="/pedido/nuevo" component={PedidosDetalle} />
 
+					<Route path="/pedido/editar/:id" let:params>
+						<PedidosDetalle pedidoId={params.id} />
+					</Route>
+					
 					<Route path="/cupones" component={Cupones} />
 					<Route path="/cupon/nuevo" component={CuponDetalle} />
 					<Route path="/cupones/edit/:id" let:params>
